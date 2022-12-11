@@ -1,7 +1,11 @@
 const fetch = require('node-fetch');
+const { writeFile } = require('fs');
+const { normalize } = require('path');
 
 const url = 'https://danepubliczne.imgw.pl/api/data/synop';
 const cityName = process.argv[2];
+
+const getDataFileName = (city) => `./data/${city}.txt`;
 
 const processWeatherData = (data) => {
   const foundData = data.find((stationData) => stationData.stacja === cityName);
