@@ -1,26 +1,18 @@
 {
-  "name": "weather-app",
-  "version": "1.0.0",
-  "description": "Simple weather app",
+  "name": "node-weather-app",
+  "version": "0.0.1",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "node",
-    "weather",
-    "api"
-  ],
-  "author": "Daniel Kamiński",
+  "author": "hoffman",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^3.3.0"
-  },
-  "devDependencies": {
-    "@types/node-fetch": "^2.6.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-react": "^7.31.11"
+    "eslint-plugin-react": "^7.31.11",
+    "node-fetch": "^2.6.7"
   }
 }
