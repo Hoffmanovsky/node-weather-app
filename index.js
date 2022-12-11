@@ -3,21 +3,19 @@ const { appendFile } = require('fs').promises;
 const { normalize, resolve } = require('path');
 
 const url = 'https://danepubliczne.imgw.pl/api/data/synop';
-const cityName = process.argv[2];
 
 function safeJoin(base, target) {
   const targetPath = `.${normalize(`/${target}`)}`;
   return resolve(base, targetPath);
 }
+
 const getDataFileName = (city) => safeJoin('./data', `${city}.txt`);
 
-const processWeatherData = async (data) => {
+const processWeatherData = async (data, cityName) => {
   const foundData = data.find((stationData) => stationData.stacja === cityName);
 
   if (!foundData) {
-    console.log('Takiego miasta nasze API nie przewidziało :(');
-    // eslint-disable-next-line no-useless-return
-    return;
+    throw new Error("There's no such city in our API."); index.js;
   }
 
   const {
@@ -34,6 +32,14 @@ const processWeatherData = async (data) => {
   await appendFile(getDataFileName(cityName), `${dateTimeString}\n${weatherInfo}\n`);
 };
 
-fetch(url)
-  .then((r) => r.json())
-  .then(processWeatherData);
+const checkCityWeather = async (cityName) => {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    await processWeatherData(data, cityName);
+  } catch (e) {
+    console.log('An error has occurred', e);
+  }
+};
+
+checkCityWeather(process.argv[2]);
