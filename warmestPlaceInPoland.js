@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 const url = 'https://danepubliczne.imgw.pl/api/data/synop';
 
 const processWeatherData = async (data) => {
-  const sortedWarmData = [...data].sort((a, b) => Number(b.temperatura) - Number(a.temperatura));
   const sortedColdData = [...data].sort((a, b) => Number(a.temperatura) - Number(b.temperatura));
+  const sortedWarmData = [...data].sort((a, b) => Number(b.temperatura) - Number(a.temperatura));
 
   const {
     stacja: warmStation,
